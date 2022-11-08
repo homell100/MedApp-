@@ -5,6 +5,7 @@ app = Flask(__name__)
 app.secret_key = "biiqw73_^¨PLAKV7tejas@~#2d"
 
 app.register_blueprint(insert_page)
+@app.route("/home")
 @app.route("/")
 def index():
 	return render_template("home.html")
