@@ -25,3 +25,22 @@ def insert_staff():
 	cf.insert_staff(name, surname, position)
 	# De cualquier modo, y si todo fue bien, redireccionar
 	return redirect("/home")
+
+
+#-------
+#Patient
+#-------
+@insert_page.route("/add_patient")
+def form_add_patient():
+	return render_template("add_patient.html")
+
+@insert_page.route("/insert_patient", methods=["GET", "POST"])
+def insert_patient():
+	name = request.form["name"]
+	surname = request.form["surname"]
+	entry_date = request.form["entry_date"]
+	exit_date = request.form["exit_date"]
+	id_bed = request.form["id_bed"]
+
+	cf.insert_patient(name, surname, entry_date, exit_date, id_bed)
+	return redirect("/home")
