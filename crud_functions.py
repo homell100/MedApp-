@@ -28,3 +28,15 @@ def insert_patient(name, surname, entry_date, exit_date, id_bed):
 		cur.execute(query)
 	conn.commit()
 	conn.close()
+
+
+
+@adding_hypens_to_args
+def insert_room(floor, number_room):
+	conn = make_connection()
+	with conn.cursor() as cur:
+		query = q.QUERY_INSERT_ROOM.format(floor=floor,number_room=number_room)
+		cur.execute(query)
+	conn.commit()
+	conn.close()
+	
