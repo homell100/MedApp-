@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+{% block title %} App {% endblock %}
+{% block content %}
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Medical App</h3>
+            <form action="{{url_for('insert_page.insert_patient')}}" method="post">
+                <label for="name">Name:</label>
+                <input required type="text" class="input" placeholder="name" name="name" id="name">
+                <label for="surname">Surname:</label>
+                <input required type="text" class="input" placeholder="surname" name="surname" id="surname">
+                <label for="entry_date">Entry Date:</label>
+                <input required type="date" class="input" placeholder="Entry Date" name="entry_date" id="entry_date">
+                <label for="id_bed">Exit Date:</label>
+                <input type="date" class="input" placeholder="Exit Date" name="exit_date" id="exit_date">
+                <label for="id_bed">Bed assigned:</label>
+                <input type="number" class="id_bed" placeholder="Bed assigned" name="id_bed" id="id_bed">
+                <button type="submit" class="button is-success mt-2">Save</button>
+                <a href="{{url_for('index')}}" class="button is-primary mt-2">Back</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
