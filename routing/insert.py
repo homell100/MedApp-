@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, Blueprint
 import crud_functions as cf
 from psycopg2 import errors as err
 import datetime
+import error_messages as em
 
 insert_page = Blueprint('insert_page', __name__, 
 						template_folder='templates')
@@ -53,5 +54,11 @@ def form_add_room():
 def insert_room():
 	floor = request.form["floor"]
 	room_number = request.form["room_number"]
+
+	rooms = cf.check_record_room(floor, room_number)
+	if len(rooms):
+		return render_template("add_room.html", 
+			error=em.ERROR_REPEATED_RECORD)
+
 	cf.insert_room(floor, room_number)
 	return redirect("/home")

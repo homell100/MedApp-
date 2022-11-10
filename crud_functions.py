@@ -38,4 +38,16 @@ def insert_room(floor, number_room):
 		query = q.QUERY_INSERT_ROOM.format(floor=floor,number_room=number_room)
 		cur.execute(query)
 	conn.commit()
-	conn.close()	
+	conn.close()
+
+@adding_hypens_to_args
+def check_record_room(floor, number_room):
+	conn = make_connection()
+	rooms = []
+	with conn.cursor() as cur:
+		query = q.QUERY_CHECK_RECORD_EXISTS_ROOM.format(floor=floor,number_room=number_room)
+		cur.execute(query)
+		rooms = cur.fetchall()
+	conn.close()
+	return rooms
+	
