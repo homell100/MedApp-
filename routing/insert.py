@@ -9,7 +9,6 @@ insert_page = Blueprint('insert_page', __name__,
 #---------------------
 #INSERT
 #---------------------
-
 #-------
 #Staff
 #-------
@@ -23,7 +22,6 @@ def insert_staff():
 	surname = request.form["surname"]
 	position = request.form["position"]
 	cf.insert_staff(name, surname, position)
-	# De cualquier modo, y si todo fue bien, redireccionar
 	return redirect("/home")
 
 
@@ -41,6 +39,19 @@ def insert_patient():
 	entry_date = request.form["entry_date"]
 	exit_date = request.form["exit_date"]
 	id_bed = request.form["id_bed"]
-
 	cf.insert_patient(name, surname, entry_date, exit_date, id_bed)
+	return redirect("/home")
+
+#-------
+#Room
+#-------
+@insert_page.route("/add_room")
+def form_add_room():
+	return render_template("add_room.html")
+
+@insert_page.route("/insert_room", methods=["GET", "POST"])
+def insert_room():
+	floor = request.form["floor"]
+	room_number = request.form["room_number"]
+	cf.insert_room(floor, room_number)
 	return redirect("/home")

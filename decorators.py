@@ -11,5 +11,5 @@ def adding_hypens_to_args(func):
 				arg = 'NULL'
 			print(arg, type(arg))
 			args_.append(arg)
-		func(*args_)
+		return func(*args_)
 	return wrapper_adding_hypens_to_args

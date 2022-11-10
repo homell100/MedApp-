@@ -38,5 +38,4 @@ def insert_room(floor, number_room):
 		query = q.QUERY_INSERT_ROOM.format(floor=floor,number_room=number_room)
 		cur.execute(query)
 	conn.commit()
-	conn.close()
-	
+	conn.close()	
