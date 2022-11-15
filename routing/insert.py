@@ -3,6 +3,7 @@ import crud_functions as cf
 from psycopg2 import errors as err
 import datetime
 import error_messages as em
+import database_design as dbd 
 
 insert_page = Blueprint('insert_page', __name__, 
 						template_folder='templates')

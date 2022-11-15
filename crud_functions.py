@@ -29,25 +29,28 @@ def insert_patient(name, surname, entry_date, exit_date, id_bed):
 	conn.commit()
 	conn.close()
 
+def create_check_duplicate_records_query(table_name, **kwarg):
+	query = q.TEMPLATE_QUERY_CHECK_RECORDS_EXIST.format(table=table_name)
+	query_where_parts = []
+	for key, value in kwarg.items():
+		if len(value):
+			query_where_part = q.CLAUSE_WHERE_VALUE.format(column_name=key, value=value)
+		else:
+			query_where_part = q.CLAUSE_WHERE_NULL.format(column_name=key)
+		query_where_parts.append(query_where_part)
+	query += q.AND_SEPARATOR.join(query_where_parts)
+	return query
 
-
-@adding_hypens_to_args
-def insert_room(floor, number_room):
+@adding_hypens
+def check_record(table_name, **kwarg):
 	conn = make_connection()
+	list_records = []
 	with conn.cursor() as cur:
-		query = q.QUERY_INSERT_ROOM.format(floor=floor,number_room=number_room)
+		query = create_check_duplicate_records_query(table_name, **kwarg)
+		print(query)
 		cur.execute(query)
-	conn.commit()
+		list_records = cur.fetchall()
 	conn.close()
+	return list_records
 
-@adding_hypens_to_args
-def check_record_room(floor, number_room):
-	conn = make_connection()
-	rooms = []
-	with conn.cursor() as cur:
-		query = q.QUERY_CHECK_RECORD_EXISTS_ROOM.format(floor=floor,number_room=number_room)
-		cur.execute(query)
-		rooms = cur.fetchall()
-	conn.close()
-	return rooms
 	
