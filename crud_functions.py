@@ -1,30 +1,32 @@
 from aux_functions import make_connection
 import queries as q
-from decorators import adding_hypens_to_args
+from decorators import adding_hypens, converting_none_to_null
 
 #---------------------
 #INSERT
 #---------------------
-@adding_hypens_to_args
-def insert_staff(name, surname, position):
-	conn = make_connection()
-	with conn.cursor() as cur:
-		query = q.QUERY_INSERT_STAFF.format(name=name,
-												surname=surname,
-												position=position)
-		cur.execute(query)
-	conn.commit()
-	conn.close()
 
-@adding_hypens_to_args
-def insert_patient(name, surname, entry_date, exit_date, id_bed):
+def create_insert_query(table_name, **dict_col_value):
+	list_col_names = []
+	list_values = []
+	for key, value in dict_col_value.items():
+		list_col_names.append(key)
+		list_values.append(value)
+	string_col_names = q.COMMA_SEPARATOR.join(list_col_names)
+	string_values = q.COMMA_SEPARATOR.join(list_values)
+
+	query = ""
+	query += q.TEMPLATE_QUERY_INSERT_TABLE.format(table=table_name, 
+		list_col_names=string_col_names)
+	query += q.TEMPLATE_QUERY_INSERT_VALUES.format(list_values=string_values)
+	return query
+
+@adding_hypens
+@converting_none_to_null
+def insert_query(table_name, **dict_col_value):
 	conn = make_connection()
 	with conn.cursor() as cur:
-		query = q.QUERY_INSERT_PATIENT.format(name=name,
-												surname=surname,
-												entry_date=entry_date,
-												exit_date=exit_date,
-												id_bed=id_bed)
+		query = create_insert_query(table_name, **dict_col_value)
 		cur.execute(query)
 	conn.commit()
 	conn.close()

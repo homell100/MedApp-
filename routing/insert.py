@@ -11,6 +11,7 @@ insert_page = Blueprint('insert_page', __name__,
 #---------------------
 #INSERT
 #---------------------
+
 #-------
 #Staff
 #-------
