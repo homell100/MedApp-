@@ -6,6 +6,7 @@
     <div class="columns">
         <div class="column">
             <h3 class="is-size-3">Medical App</h3>
+            {% include "_error_display.html" %}
             <form action="{{url_for('insert_page.insert_staff')}}" method="post">
                 <label for="name">Name:</label>
                 <input required type="text" class="input" placeholder="name" name="name" id="name">
