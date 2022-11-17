@@ -19,7 +19,6 @@ def insert(table_name):
 		return False
 	cf.insert_query(table_name, **dict_values)
 	return True
-
 #-------
 #Staff
 #-------
