@@ -62,3 +62,17 @@ def insert_room():
 		return render_template("add_room.html", 
 			error=em.ERROR_REPEATED_RECORD)
 	return redirect("/home")
+
+#-------
+#Staff Patient
+#-------
+@insert_page.route("/add_staff_patient")
+def form_add_staff_patient():
+	return render_template("add_staff_patient.html")
+
+@insert_page.route("/insert_staff_patient", methods=["GET", "POST"])
+def insert_staff_patient():
+	if not insert(dbd.TABLE_NAME_STAFF_PATIENT):
+		return render_template("add_staff_patient.html", 
+			error=em.ERROR_REPEATED_RECORD)
+	return redirect("/home")
