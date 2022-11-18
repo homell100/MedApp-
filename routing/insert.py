@@ -57,7 +57,7 @@ def insert_patient():
 
 
 #-------
-#Room
+#Bed
 #-------
 table_room = dbd.TABLE_NAME_ROOM
 @insert_page.route(rc.ROUTING_CONF[table_room]["route_add"])
@@ -67,6 +67,18 @@ def form_add_room():
 @insert_page.route(rc.ROUTING_CONF[table_room]["route_insert"], methods=["GET", "POST"])
 def insert_room():
 	return attempt_insert(table_room)
+
+#-------
+#Room
+#-------
+table_bed = dbd.TABLE_NAME_BED
+@insert_page.route(rc.ROUTING_CONF[table_bed]["route_add"])
+def form_add_bed():
+	return render_template(rc.ROUTING_CONF[table_bed]["html_form"])
+
+@insert_page.route(rc.ROUTING_CONF[table_bed]["route_insert"], methods=["GET", "POST"])
+def insert_bed():
+	return attempt_insert(table_bed)
 
 #-------
 #Staff Patient
