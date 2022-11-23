@@ -12,9 +12,11 @@ def insert(table_name):
 	succed = True
 	error_message = ""
 
-	dict_values = {key:value for key, value in request.form.items() if key in dbd.TABLES_COLUMNS[table_name]}
+	dict_values = {key:value for key, value in request.form.items()\
+	if key in dbd.TABLES_COLUMNS[table_name]}
 	print(dict_values)
-	if len(cf.check_record(table_name, **dict_values)):
+	if (table_name not in dbd.LIST_TABLE_ACCEPT_DUPLICATES) &\
+	len(cf.check_record(table_name, **dict_values)):
 		succed = False
 		error_message = em.ERROR_REPEATED_RECORD
 	try:
