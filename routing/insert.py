@@ -4,9 +4,16 @@ from psycopg2 import errors as err
 import error_messages as em
 import database_design as dbd 
 import routing.routing_conf as rc
+from pathlib import Path, WindowsPath
+import os
+
+template_folder = Path('templates')
+subfolder_tempaltes_insert = "add" 
+template_folder_full_path = os.getcwd() / template_folder / subfolder_tempaltes_insert
+
 
 insert_page = Blueprint('insert_page', __name__, 
-						template_folder='templates')
+						template_folder=template_folder_full_path)
 
 def insert(table_name):
 	succed = True
