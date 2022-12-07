@@ -4,6 +4,7 @@ from psycopg2 import errors as err
 from database_design import *
 import os
 from pathlib import Path
+import database_design as dbd
 
 template_folder = Path('templates')
 subfolder_templates = "select" 
@@ -18,20 +19,24 @@ select_page = Blueprint('select_page', __name__,
 
 @select_page.route("/select_staff")
 def select_staff():
-	staffs = cf.get_staff()
-	return render_template("select.html", table_name="staff", records=staffs)
+	records = cf.get_records(table_name="staff")
+	return render_template("select.html", col_names=dbd.TABLES_COLUMNS[dbd.TABLE_NAME_STAFF],
+	 table_name=dbd.TABLE_NAME_STAFF, records=records)
 
 @select_page.route("/select_patient")
 def select_patient():
-	patients = cf.get_patient()
-	return render_template("select.html", table_name="patient", records=patients)
+	records = cf.get_records(table_name="patient")
+	return render_template("select.html", col_names=dbd.TABLES_COLUMNS[dbd.TABLE_NAME_PATIENT],
+	 table_name=dbd.TABLE_NAME_PATIENT, records=records)
 
 @select_page.route("/select_room")
 def select_room():
-	rooms = cf.get_room()
-	return render_template("select.html", table_name="room", records=rooms)
+	records = cf.get_records(table_name="room")
+	return render_template("select.html", col_names=dbd.TABLES_COLUMNS[dbd.TABLE_NAME_ROOM],
+	 table_name=dbd.TABLE_NAME_ROOM, records=records)
 
 @select_page.route("/select_bed")
 def select_bed():
-	beds = cf.get_bed()
-	return render_template("select.html", table_name="bed", records=beds)
+	records = cf.get_records(table_name="bed")
+	return render_template("select.html", col_names=dbd.TABLES_COLUMNS[dbd.TABLE_NAME_BED],
+	 table_name=dbd.TABLE_NAME_BED, records=records)
