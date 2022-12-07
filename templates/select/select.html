@@ -10,7 +10,7 @@
                 <thead>
                     <tr>        
                         {% for col_name in col_names %}
-                        <th>col_name</th>
+                        <th>{{ col_name }}</th>
                         {% endfor %}
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -26,8 +26,8 @@
                             <a href="{{url_for('index', id=record[0])}}" class="button is-info">Editar</a>
                         </td>
                         <td>
-                            <form action="{{url_for('delete_page.delete_' + {{ table_name }}" )}} method="POST">
-                                <input type="hidden" name="id" value="{{member_staff[0]}}">
+                            <form action="{{ table_name }}" method="POST">
+                                <input type="hidden" name="id" value="{{record[0]}}">
                                 <button class="button is-danger">Eliminar</button>
                             </form>
                         </td>
