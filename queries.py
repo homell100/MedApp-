@@ -30,3 +30,14 @@ CLAUSE_WHERE_VALUE = """
 CLAUSE_WHERE_NULL = """
 {column_name} IS NULL
 """
+
+#---------------------
+#SELECT
+#---------------------
+
+TEMPLATE_QUERY_SELECT = """
+SELECT
+	*
+FROM
+	{table}
+"""

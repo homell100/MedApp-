@@ -55,4 +55,17 @@ def check_record(table_name, **kwarg):
 	conn.close()
 	return list_records
 
+#---------------------
+#SELECT
+#---------------------
+
 	
+def get_records(table_name):
+	conn = make_connection()
+	list_records = []
+	with conn.cursor() as cur:
+		query = q.TEMPLATE_QUERY_SELECT.format(table=table_name)
+		cur.execute(query)
+		list_records = cur.fetchall()
+	print(list_records)
+	return list_records
